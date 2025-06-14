@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tapo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Adds Tapo nodes to n8n",
   "author": {
     "name": "JavierG",
