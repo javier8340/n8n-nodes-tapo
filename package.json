@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-tapo",
   "version": "1.0.1",
-  "description": "Controla bombillas y dispositivos TP-Link Tapo desde n8n",
+  "description": "Adds Tapo nodes to n8n",
   "author": {
     "name": "JavierG",
     "email": "jgg83402@gmail.com"
@@ -53,7 +53,8 @@
     "node": ">=18.10"
   },
   "files": [
-    "dist"
+    "dist",
+    "resources"
   ],
   "packageManager": "npm@>=9"
 }

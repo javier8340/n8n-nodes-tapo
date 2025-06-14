@@ -6,8 +6,9 @@ export class TapoNode implements INodeType {
         displayName: 'Tapo',
         name: 'tapo',
         group: ['output'],
+        icon: 'file:resources/tapo.svg',
         version: 1,
-        description: 'Controla luces y enchufes TP-Link Tapo',
+        description: 'Controls TP-Link Tapo lights and plugs',
         defaults: { name: 'Tapo' },
         inputs: [NodeConnectionType.Main],
         outputs: [NodeConnectionType.Main],
@@ -15,30 +16,30 @@ export class TapoNode implements INodeType {
             { displayName: 'Email', name: 'email', type: 'string', default: '' },
             { displayName: 'Password', name: 'password', type: 'string', default: '', typeOptions: { password: true } },
             {
-                displayName: 'Modo conexión',
+                displayName: 'Connection Mode',
                 name: 'mode',
                 type: 'options',
                 options: [
-                    { name: 'Por IP local', value: 'local' },
-                    { name: 'Desde nube (descubrimiento)', value: 'cloud' },
+                    { name: 'Via local IP', value: 'local' },
+                    { name: 'From cloud (discovery)', value: 'cloud' },
                 ],
                 default: 'local',
             },
-            { displayName: 'IP del dispositivo', name: 'deviceIp', type: 'string', default: '' },
+            { displayName: 'Device IP', name: 'deviceIp', type: 'string', default: '' },
             {
-                displayName: 'Dispositivo (solo nube)',
+                displayName: 'Device (cloud only)',
                 name: 'deviceId',
                 type: 'string',
                 displayOptions: { show: { mode: ['cloud'] } },
                 default: '',
             },
             {
-                displayName: 'Acción',
+                displayName: 'Action',
                 name: 'action',
                 type: 'options',
                 options: [
-                    { name: 'Encender', value: 'on' },
-                    { name: 'Apagar', value: 'off' },
+                    { name: 'Turn On', value: 'on' },
+                    { name: 'Turn Off', value: 'off' },
                     { name: 'Toggle', value: 'toggle' },
                 ],
                 default: 'on',
@@ -62,7 +63,7 @@ export class TapoNode implements INodeType {
                 const deviceId = this.getNodeParameter('deviceId', i) as string;
                 const devList = await cloud.listDevicesByType('');
                 const selected = devList.find((d: any) => d.deviceId === deviceId);
-                if (!selected) throw new Error('Dispositivo no encontrado en la nube');
+                if (!selected) throw new Error('Device not found in the cloud');
                 device = await loginDevice(email, password, selected);
             } else {
                 const ip = this.getNodeParameter('deviceIp', i) as string;
