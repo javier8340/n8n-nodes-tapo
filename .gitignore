@@ -1,0 +1,50 @@
+# Node
+node_modules/
+dist/
+.cache/
+.nyc_output/
+coverage/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor config
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Environment variables
+.env
+.env.*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# n8n Custom
+n8n-local-files/
+n8n-starter-template/
+
+# Optional: output from scripts (adjust if needed)
+build/
+tmp/
+out/

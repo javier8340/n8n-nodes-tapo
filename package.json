@@ -1,0 +1,36 @@
+{
+  "name": "n8n-nodes-tapo",
+  "version": "1.0.1",
+  "description": "Controla bombillas TP-Link Tapo desde n8n",
+  "author": "jgg8340@gmail.com",
+  "license": "MIT",
+  "keywords": [
+    "n8n",
+    "n8n-community-node-package",
+    "tapo",
+    "tp-link"
+  ],
+  "main": "dist/TapoNode.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "pnpm build"
+  },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "dist/TapoNode.js"
+    ]
+  },
+  "dependencies": {
+    "n8n-workflow": "^1.82.0",
+    "tp-link-tapo-connect": "^2.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.10"
+  }
+}
