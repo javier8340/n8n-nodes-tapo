@@ -1,20 +1,36 @@
 {
   "name": "n8n-nodes-tapo",
   "version": "1.0.1",
-  "description": "Controla bombillas TP-Link Tapo desde n8n",
-  "author": "jgg8340@gmail.com",
+  "description": "Controla bombillas y dispositivos TP-Link Tapo desde n8n",
+  "author": {
+    "name": "JavierG",
+    "email": "jgg83402@gmail.com"
+  },
   "license": "MIT",
   "keywords": [
     "n8n",
     "n8n-community-node-package",
     "tapo",
-    "tp-link"
+    "tp-link",
+    "iot",
+    "smart-home"
   ],
+  "homepage": "https://github.com/javier8340/n8n-nodes-tapo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javier8340/n8n-nodes-tapo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/javier8340/n8n-nodes-tapo/issues"
+  },
   "main": "dist/TapoNode.js",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "prepublishOnly": "pnpm build"
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src --ext .ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build && npm run lint"
   },
   "n8n": {
     "n8nNodesApiVersion": 1,
@@ -28,9 +44,16 @@
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
+    "prettier": "^3.5.3"
   },
   "engines": {
     "node": ">=18.10"
-  }
+  },
+  "files": [
+    "dist"
+  ],
+  "packageManager": "npm@>=9"
 }
