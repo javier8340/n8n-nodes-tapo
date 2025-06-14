@@ -78,8 +78,7 @@ export class TapoNode implements INodeType {
                     await device.turnOff();
                     break;
                 case 'toggle':
-                    const info = await device.getDeviceInfo();
-                    await (info.device_on ? device.turnOff() : device.turnOn());
+                    await (device.getDeviceInfo().device_on ? device.turnOff() : device.turnOn());
                     break;
             }
 

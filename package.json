@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tapo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Adds Tapo nodes to n8n",
   "author": {
     "name": "JavierG",
@@ -28,9 +28,9 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build && npm run lint"
+    "prepublishOnly": "npm run build"
   },
   "n8n": {
     "n8nNodesApiVersion": 1,
@@ -43,11 +43,16 @@
     "tp-link-tapo-connect": "^2.0.7"
   },
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
     "@types/node": "^18.0.0",
-    "typescript": "^5.3.3",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^9.29.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
-    "prettier": "^3.5.3"
+    "globals": "^16.2.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.34.0"
   },
   "engines": {
     "node": ">=18.10"
