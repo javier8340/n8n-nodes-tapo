@@ -12,8 +12,8 @@ export class TapoNode {
             inputs: ["main" /* NodeConnectionType.Main */],
             outputs: ["main" /* NodeConnectionType.Main */],
             properties: [
-                { displayName: 'Email', name: 'email', type: 'string', default: '' },
-                { displayName: 'Password', name: 'password', type: 'string', default: '', typeOptions: { password: true } },
+                { displayName: 'Email', name: 'email', type: 'string', default: '', required: true },
+                { displayName: 'Password', name: 'password', type: 'string', default: '', credentialTypes: ["has:authenticate"], required: true },
                 {
                     displayName: 'Connection Mode',
                     name: 'mode',

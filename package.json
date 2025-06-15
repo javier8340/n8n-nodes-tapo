@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tapo",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Adds Tapo nodes to n8n",
   "author": {
     "name": "JavierG",
@@ -25,7 +25,8 @@
   },
   "main": "dist/TapoNode.js",
   "scripts": {
-    "build": "tsc",
+    "copy:assets": "cpx \"src/resources/**/*\" dist/resources",
+    "build": "tsc && npm run copy:assets",
     "test": "jest",
     "dev": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -49,6 +50,7 @@
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
+    "cpx": "^1.5.0",
     "eslint": "^9.29.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "globals": "^16.2.0",
@@ -62,8 +64,7 @@
     "node": ">=18.10"
   },
   "files": [
-    "dist",
-    "resources"
+    "dist"
   ],
   "packageManager": "npm@>=9"
 }

@@ -13,8 +13,8 @@ export class TapoNode implements INodeType {
         inputs: [NodeConnectionType.Main],
         outputs: [NodeConnectionType.Main],
         properties: [
-            { displayName: 'Email', name: 'email', type: 'string', default: '' },
-            { displayName: 'Password', name: 'password', type: 'string', default: '', typeOptions: { password: true } },
+            { displayName: 'Email', name: 'email', type: 'string', default: '' , required: true },
+            { displayName: 'Password', name: 'password', type: 'string', default: '', typeOptions:{password:true}, required: true },
             {
                 displayName: 'Connection Mode',
                 name: 'mode',
