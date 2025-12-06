@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tapo",
-  "version": "1.0.7",
+  "version": "1.1.0-beta.7",
   "description": "Adds Tapo nodes to n8n",
   "author": {
     "name": "JavierG",
@@ -37,7 +37,8 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "nodes": [
-      "dist/TapoNode.js"
+      "dist/TapoNode.js",
+      "dist/TapoTrigger.js"
     ],
     "credentials": [
 			"dist/credentials/TapoAccount.credentials.js"
@@ -45,7 +46,7 @@
   },
   "dependencies": {
     "n8n-workflow": "^1.17.0",
-    "tp-link-tapo-connect": "^2.0.7"
+    "tp-link-tapo-connect": "^2.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

@@ -1,6 +1,6 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, NodeConnectionTypes, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
-import { cloudLogin, loginDevice, loginDeviceByIp, TapoDeviceInfo } from 'tp-link-tapo-connect';
-import { TapoDevice } from "./plug/TapoPlugController";
+import { cloudLogin, loginDevice, loginDeviceByIp} from 'tp-link-tapo-connect';
+import TapoData, { TapoDevice } from "./plug/TapoData";
 
 
 export class TapoNode implements INodeType {
@@ -21,30 +21,7 @@ export class TapoNode implements INodeType {
         inputs: [NodeConnectionTypes.Main],
         outputs: [NodeConnectionTypes.Main],
         properties: [
-            {
-                displayName: 'Connection Mode',
-                name: 'mode',
-                type: 'options',
-                options: [
-                    { name: 'Via local IP', value: 'local' },
-                    { name: 'From cloud (discovery)', value: 'cloud' },
-                ],
-                default: 'local',
-            },
-            {
-                displayName: 'Device IP',
-                name: 'deviceIp',
-                type: 'string',
-                default: '',
-                displayOptions: { show: { mode: ['local'] } },
-            },
-            {
-                displayName: 'Device (cloud only)',
-                name: 'deviceId',
-                type: 'string',
-                displayOptions: { show: { mode: ['cloud'] } },
-                default: '',
-            },
+            ...TapoData.defaultParameters,
             {
                 displayName: 'Device Type',
                 name: 'device',
@@ -180,7 +157,8 @@ export class TapoNode implements INodeType {
     async execute(this: IExecuteFunctions): Promise<any[][]> {
         const items = this.getInputData();
         const returnData: any[] = [];
-        const credentials = (await this.getCredentials('tapoAccount')) as { email: string; password: string; };
+        const credentials = (await this.getCredentials('TapoAccount')) as { email: string; password: string; };
+        this.logger.info('Using Tapo account: ' + credentials.email);
         const email = credentials.email;
         const password = credentials.password;
         for (let i = 0; i < items.length; i++) {
@@ -190,8 +168,12 @@ export class TapoNode implements INodeType {
             if (mode === 'cloud') {
                 const cloud = await cloudLogin(email, password);
                 const deviceId = this.getNodeParameter('deviceId', i) as string;
-                const devList = await cloud.listDevicesByType('');
-                const selected = devList.find((d: any) => d.deviceId === deviceId);
+
+                const devList = await cloud.listDevices();
+                let selected = devList.find((d: any) => d.deviceId === deviceId);
+                if (!selected) {
+                    selected = devList.find((d: any) => d.alias === deviceId);
+                }
                 if (!selected) throw new Error('Device not found in the cloud');
                 device = await loginDevice(email, password, selected);
             } else {
@@ -249,7 +231,7 @@ export class TapoNode implements INodeType {
                     }
                     break;
                 default:
-                    returnData.push({ json: { status: 'error', message: 'Unknown action' } })
+                    throw new Error('Unknown action');
             }
         }
 
