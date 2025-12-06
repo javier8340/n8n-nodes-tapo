@@ -26,7 +26,21 @@ export class TapoTrigger implements INodeType {
         inputs: [],
         outputs: ['main'],
         properties: [
-            ...TapoData.defaultParameters
+            ...TapoData.defaultParameters,
+        {
+            displayName: 'Polling Interval (seconds)',
+            name: 'interval',
+            type: 'number',
+            default: 60,
+            description: 'How often to poll the device for state changes',
+            options: [
+                { name: '5 seconds', value: 5 },
+                { name: '10 seconds', value: 10 },
+                { name: '30 seconds', value: 30 },
+                { name: '60 seconds', value: 60 },
+                { name: '300 seconds', value: 300 },
+            ],
+        }
         ],
     };
 
@@ -43,7 +57,7 @@ export class TapoTrigger implements INodeType {
             const cloud = await cloudLogin(credentials.email, credentials.password);
             const deviceId = this.getNodeParameter('deviceId') as string;
             const devList = await cloud.listDevices();
-            const selected = devList.find((d: any) => d.deviceId === deviceId);
+            const selected = devList.find((d: any) => d.deviceId === deviceId || d.alias === deviceId);
             if (!selected) throw new Error('Device not found in the cloud');
             device = await loginDevice(credentials.email, credentials.password, selected);
         } else {
