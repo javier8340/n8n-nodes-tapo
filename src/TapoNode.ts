@@ -137,6 +137,7 @@ export class TapoNode implements INodeType {
                     { name: 'Turn Off', value: 'off' },
                     { name: 'Set state', value: 'setState' },
                     { name: 'Toggle', value: 'toggle' },
+                    {name: 'Get state', value: 'getState' },
                 ];
                 if (device === 'plugs') {
                     return [
@@ -230,8 +231,14 @@ export class TapoNode implements INodeType {
                         returnData.push({ json: { status: 'ok', action: 'getEnergy', usage } });
                     }
                     break;
+                case 'getState':
+                    {
+                        const info = await device.getDeviceInfo();
+                        returnData.push({ json: { status: 'ok', action: 'getState', state: info.device_on } });
+                    }
+                    break
                 default:
-                    throw new Error('Unknown action');
+                    throw new Error('Unknown action: '+ action);
             }
         }
 
